@@ -12,8 +12,9 @@
 | `evidence.md` | Requires inline evidence for confident claims; no-evidence protocol |
 | `auto-mode-writes.md` | Confirm before every write/mutate action in auto mode |
 | `self-review-before-commit.md` | Review diffs before committing; never chain commit + push |
+| `CLAUDE.inline.md` | Self-contained mirror of `CLAUDE.md`'s imports (brevity, docs, evidence, auto-mode-writes) — no `@~/.claude/rules/...` imports, for environments that can't resolve them |
 
-Note: `CLAUDE.md`'s `@~/.claude/rules/...` imports currently cover `brevity`, `docs`, `evidence`, and `auto-mode-writes` only — `self-review-before-commit.md` is not yet wired into the import list (kept here in sync with what's on disk at `~/.claude/rules/`).
+Note: `CLAUDE.md`'s `@~/.claude/rules/...` imports currently cover `brevity`, `docs`, `evidence`, and `auto-mode-writes` only — `self-review-before-commit.md` is not yet wired into the import list (kept here in sync with what's on disk at `~/.claude/rules/`). `CLAUDE.inline.md` mirrors the same 4 rules and must be updated by hand alongside them.
 
 ## Usage
 
@@ -26,17 +27,19 @@ for f in brevity docs evidence auto-mode-writes self-review-before-commit; do
 done
 ```
 
-**Claude Code on the web (cloud sessions)** — cloud sandboxes only ever see the repo being worked on ("repo only"; no local config). There's no built-in way to apply personal rules across every cloud session. Workaround: add a setup script to that project's cloud environment config that layers your rules on top of (not over) the project's own `CLAUDE.md`, using `CLAUDE.local.md` (an additive, most-specific memory layer, conventionally gitignored):
+**Claude Code on the web (cloud sessions)** — cloud sandboxes only ever see the repo being worked on ("repo only"; no local config). There's no built-in way to apply personal rules across every cloud session. Workaround: in that project's cloud environment config (Desktop app: environment dropdown → **Add environment** → **Setup script** field), add:
 
 ```bash
-git clone https://github.com/wz185/agent-rules.git /tmp/agent-rules
-cp /tmp/agent-rules/CLAUDE.md ./CLAUDE.local.md
+curl -sSL https://raw.githubusercontent.com/wz185/agent-rules/main/CLAUDE.inline.md -o ./CLAUDE.local.md
 ```
 
-Do **not** `cp` over `./CLAUDE.md` directly — that would overwrite the project's own conventions file if one exists.
+This fetches the self-contained `CLAUDE.inline.md` (no `~/.claude/rules/` imports to resolve) and writes it to `./CLAUDE.local.md` — an additive, most-specific memory layer, conventionally gitignored, that layers on top of the project's own `CLAUDE.md` instead of overwriting it.
+
+**Requires the repo to be public** — `raw.githubusercontent.com` serves unauthenticated requests only. A private-repo alternative (scoped GitHub PAT as an environment variable + `git clone` with the token in the URL) is more setup and hasn't been implemented here. Do **not** point this at `./CLAUDE.md` directly — that would overwrite the project's own conventions file if one exists.
 
 **Claude Desktop app (chat, not Claude Code)** — doesn't read local files or Drive automatically; paste the relevant file's contents into Settings → Profile → custom instructions (global) or a Project's custom instructions (per-project).
 
 ## Decisions / actions needed
 
-- None currently — update this section if a rule changes in a way that needs re-pasting into Claude Desktop, or if `self-review-before-commit.md` gets added to `CLAUDE.md`'s import list.
+- **Repo visibility**: currently private. The cloud-session setup script above needs it public to `curl` from `raw.githubusercontent.com` unauthenticated — flip visibility, or switch to the PAT-based `git clone` alternative, before relying on it.
+- Update this section if a rule changes in a way that needs re-pasting into Claude Desktop, or if `self-review-before-commit.md` gets added to `CLAUDE.md`'s import list.
