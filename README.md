@@ -33,13 +33,10 @@ done
 curl -sSL https://raw.githubusercontent.com/wz185/agent-rules/main/CLAUDE.inline.md -o ./CLAUDE.local.md
 ```
 
-This fetches the self-contained `CLAUDE.inline.md` (no `~/.claude/rules/` imports to resolve) and writes it to `./CLAUDE.local.md` — an additive, most-specific memory layer, conventionally gitignored, that layers on top of the project's own `CLAUDE.md` instead of overwriting it.
-
-**Requires the repo to be public** — `raw.githubusercontent.com` serves unauthenticated requests only. A private-repo alternative (scoped GitHub PAT as an environment variable + `git clone` with the token in the URL) is more setup and hasn't been implemented here. Do **not** point this at `./CLAUDE.md` directly — that would overwrite the project's own conventions file if one exists.
+This fetches the self-contained `CLAUDE.inline.md` (no `~/.claude/rules/` imports to resolve) and writes it to `./CLAUDE.local.md` — an additive, most-specific memory layer, conventionally gitignored, that layers on top of the project's own `CLAUDE.md` instead of overwriting it. The repo is public, so `raw.githubusercontent.com` serves this unauthenticated. Do **not** point this at `./CLAUDE.md` directly — that would overwrite the project's own conventions file if one exists.
 
 **Claude Desktop app (chat, not Claude Code)** — doesn't read local files or Drive automatically; paste the relevant file's contents into Settings → Profile → custom instructions (global) or a Project's custom instructions (per-project).
 
 ## Decisions / actions needed
 
-- **Repo visibility**: currently private. The cloud-session setup script above needs it public to `curl` from `raw.githubusercontent.com` unauthenticated — flip visibility, or switch to the PAT-based `git clone` alternative, before relying on it.
-- Update this section if a rule changes in a way that needs re-pasting into Claude Desktop, or if `self-review-before-commit.md` gets added to `CLAUDE.md`'s import list.
+- None currently — update this section if a rule changes in a way that needs re-pasting into Claude Desktop, or if `self-review-before-commit.md` gets added to `CLAUDE.md`'s import list.
