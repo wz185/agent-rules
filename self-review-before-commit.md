@@ -1,8 +1,3 @@
----
-paths:
-  - "**/*"
----
-
 # Self-review before commit
 
 Always review your changes before committing. Never commit and push in one step.

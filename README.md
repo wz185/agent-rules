@@ -1,6 +1,6 @@
 # agent-rules
 
-**TL;DR:** Personal Claude Code / Claude Desktop configuration rules — brevity, doc formatting, evidence standards, auto-mode write confirmation, and self-review-before-commit. Source of truth for `~/.claude/CLAUDE.md` across machines.
+**TL;DR:** Personal Claude Code / Claude Desktop configuration rules — brevity, doc formatting, evidence standards, auto-mode write confirmation, clarify-before-executing, and self-review-before-commit. Source of truth for `~/.claude/CLAUDE.md` across machines, wired up by symlink.
 
 ## Files
 
@@ -11,18 +11,20 @@
 | `docs.md` | Markdown doc structure (TL;DR, decisions section, section limits) |
 | `evidence.md` | Requires inline evidence for confident claims; no-evidence protocol |
 | `auto-mode-writes.md` | Confirm before every write/mutate action in auto mode |
+| `clarify-first.md` | Surface ambiguities and confirm before executing; state assumptions explicitly |
 | `self-review-before-commit.md` | Review diffs before committing; never chain commit + push |
-| `CLAUDE.inline.md` | Self-contained mirror of `CLAUDE.md`'s imports (brevity, docs, evidence, auto-mode-writes) — no `@~/.claude/rules/...` imports, for environments that can't resolve them |
+| `CLAUDE.inline.md` | Self-contained mirror of all six rules — no `@~/.claude/rules/...` imports, for environments that can't resolve them |
 
-Note: `CLAUDE.md`'s `@~/.claude/rules/...` imports currently cover `brevity`, `docs`, `evidence`, and `auto-mode-writes` only — `self-review-before-commit.md` is not yet wired into the import list (kept here in sync with what's on disk at `~/.claude/rules/`). `CLAUDE.inline.md` mirrors the same 4 rules and must be updated by hand alongside them.
+Note: `CLAUDE.md` imports all six rule files, and `CLAUDE.inline.md` mirrors the same six inline. The two must be updated by hand alongside each other — adding a rule means a new `.md` file, a new import line in `CLAUDE.md`, a new section in `CLAUDE.inline.md`, a row in the table above, and the file's name in the symlink loop below.
 
 ## Usage
 
 **Claude Code (local CLI / Desktop app local session / Remote Control)** — all three run on your own machine and auto-load `~/.claude/CLAUDE.md` already, so no action is needed. To make this repo the live source, symlink instead of copying:
 
 ```bash
+mkdir -p ~/.claude/rules
 ln -sf ~/Development/agent-rules/CLAUDE.md ~/.claude/CLAUDE.md
-for f in brevity docs evidence auto-mode-writes self-review-before-commit; do
+for f in brevity docs evidence auto-mode-writes clarify-first self-review-before-commit; do
   ln -sf ~/Development/agent-rules/$f.md ~/.claude/rules/$f.md
 done
 ```
@@ -39,4 +41,4 @@ This fetches the self-contained `CLAUDE.inline.md` (no `~/.claude/rules/` import
 
 ## Decisions / actions needed
 
-- None currently — update this section if a rule changes in a way that needs re-pasting into Claude Desktop, or if `self-review-before-commit.md` gets added to `CLAUDE.md`'s import list.
+- None currently — update this section if a rule changes in a way that needs re-pasting into Claude Desktop.

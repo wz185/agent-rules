@@ -4,6 +4,8 @@
 @~/.claude/rules/docs.md
 @~/.claude/rules/evidence.md
 @~/.claude/rules/auto-mode-writes.md
+@~/.claude/rules/clarify-first.md
+@~/.claude/rules/self-review-before-commit.md
 
 ---
 <!-- Maintenance: this file + all imports must stay under 150 lines total.
