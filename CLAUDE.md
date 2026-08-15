@@ -1,6 +1,7 @@
 # Global rules
 
 @~/.claude/rules/brevity.md
+@~/.claude/rules/plain-english.md
 @~/.claude/rules/docs.md
 @~/.claude/rules/evidence.md
 @~/.claude/rules/auto-mode-writes.md
