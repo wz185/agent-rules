@@ -1,6 +1,6 @@
 # agent-rules
 
-**TL;DR:** Personal Claude Code / Claude Desktop configuration rules — brevity, doc formatting, evidence standards, auto-mode write confirmation, clarify-before-executing, and self-review-before-commit. Source of truth for `~/.claude/CLAUDE.md` across machines, wired up by symlink.
+**TL;DR:** Personal Claude Code / Claude Desktop configuration rules — brevity, plain English, doc formatting, evidence standards, auto-mode write confirmation, clarify-before-executing, and self-review-before-commit. Source of truth for `~/.claude/CLAUDE.md` across machines, wired up by symlink.
 
 ## Files
 
@@ -8,14 +8,15 @@
 |---|---|
 | `CLAUDE.md` | Root import file — pulls in the rules below |
 | `brevity.md` | Chat response formatting (lead with answer, bullets, no preamble) |
+| `plain-english.md` | Plain, simple English for non-native speakers — short sentences, no idioms, spell out acronyms |
 | `docs.md` | Markdown doc structure (TL;DR, decisions section, section limits) |
 | `evidence.md` | Requires inline evidence for confident claims; no-evidence protocol |
 | `auto-mode-writes.md` | Confirm before every write/mutate action in auto mode |
 | `clarify-first.md` | Surface ambiguities and confirm before executing; state assumptions explicitly |
 | `self-review-before-commit.md` | Review diffs before committing; never chain commit + push |
-| `CLAUDE.inline.md` | Self-contained mirror of all six rules — no `@~/.claude/rules/...` imports, for environments that can't resolve them |
+| `CLAUDE.inline.md` | Self-contained mirror of all seven rules — no `@~/.claude/rules/...` imports, for environments that can't resolve them |
 
-Note: `CLAUDE.md` imports all six rule files, and `CLAUDE.inline.md` mirrors the same six inline. The two must be updated by hand alongside each other — adding a rule means a new `.md` file, a new import line in `CLAUDE.md`, a new section in `CLAUDE.inline.md`, a row in the table above, and the file's name in the symlink loop below.
+Note: `CLAUDE.md` imports all seven rule files, and `CLAUDE.inline.md` mirrors the same seven inline. The two must be updated by hand alongside each other — adding a rule means a new `.md` file, a new import line in `CLAUDE.md`, a new section in `CLAUDE.inline.md`, a row in the table above, and the file's name in the symlink loop below.
 
 ## Usage
 
@@ -24,7 +25,7 @@ Note: `CLAUDE.md` imports all six rule files, and `CLAUDE.inline.md` mirrors the
 ```bash
 mkdir -p ~/.claude/rules
 ln -sf ~/Development/agent-rules/CLAUDE.md ~/.claude/CLAUDE.md
-for f in brevity docs evidence auto-mode-writes clarify-first self-review-before-commit; do
+for f in brevity plain-english docs evidence auto-mode-writes clarify-first self-review-before-commit; do
   ln -sf ~/Development/agent-rules/$f.md ~/.claude/rules/$f.md
 done
 ```

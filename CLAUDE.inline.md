@@ -1,10 +1,10 @@
 # Personal Claude Code rules (inlined)
 
 <!-- Maintenance: this is a self-contained mirror of CLAUDE.md's imports
-     (brevity, docs, evidence, auto-mode-writes, clarify-first,
-     self-review-before-commit), for environments that can't resolve
-     @~/.claude/rules/... imports — e.g. ephemeral cloud sandboxes with
-     no ~/.claude/rules/ present. Update both files together. -->
+     (brevity, plain-english, docs, evidence, auto-mode-writes,
+     clarify-first, self-review-before-commit), for environments that
+     can't resolve @~/.claude/rules/... imports — e.g. ephemeral cloud
+     sandboxes with no ~/.claude/rules/ present. Update both files together. -->
 
 ## Chat brevity rules
 
@@ -15,6 +15,16 @@
 - Max 5 bullets per list. No nested bullets beyond 1 level.
 - No headers on short responses (under ~10 lines).
 - Tables only when comparing ≥3 things side by side.
+
+## Plain English
+
+Write in plain, simple English suitable for non-native speakers.
+
+- Short sentences — aim under 30 words.
+- No idioms, no unnecessary formal/technical phrasing.
+- Spell out acronyms on first use.
+- Prefer simple swaps: "use" not "utilize", "before" not "prior to", "while" not "whilst", "from now on" not "going forward".
+- No passive voice where an active alternative is natural.
 
 ## Shared doc rules
 
