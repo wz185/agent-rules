@@ -1,8 +1,8 @@
 # Global rules
 
-@~/.claude/rules/brevity.md
+@~/.claude/rules/brevity-chat.md
 @~/.claude/rules/plain-english.md
-@~/.claude/rules/docs.md
+@~/.claude/rules/brevity-docs.md
 @~/.claude/rules/evidence.md
 @~/.claude/rules/auto-mode-writes.md
 @~/.claude/rules/clarify-first.md

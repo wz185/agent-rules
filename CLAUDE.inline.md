@@ -6,15 +6,15 @@
      can't resolve @~/.claude/rules/... imports — e.g. ephemeral cloud
      sandboxes with no ~/.claude/rules/ present. Update both files together. -->
 
-## Chat brevity rules
+## Chat brevity
 
 - Lead with the answer in ≤2 sentences. Details follow only if needed.
 - No preamble ("Sure!", "Great question!", "Let me…").
-- No trailing summary of what you just did — the output shows it.
-- Prefer bullet lists over prose paragraphs.
-- Max 5 bullets per list. No nested bullets beyond 1 level.
-- No headers on short responses (under ~10 lines).
-- Tables only when comparing ≥3 things side by side.
+- No trailing summary of what you just did — the output already shows it.
+- Bullets over prose paragraphs. Max 5 per list, no nesting beyond 1 level.
+- No headers/sections on short responses (under ~10 lines).
+- Tables only when comparing 3+ things side by side.
+- If it can be said in two words, don't use three.
 
 ## Plain English
 
@@ -26,15 +26,17 @@ Write in plain, simple English suitable for non-native speakers.
 - Prefer simple swaps: "use" not "utilize", "before" not "prior to", "while" not "whilst", "from now on" not "going forward".
 - No passive voice where an active alternative is natural.
 
-## Shared doc rules
+## Doc & artefact brevity
 
-Apply these whenever writing a markdown document or report.
+Applies to any written doc/report/artefact (Jira, Confluence, Slack, sheets, docs, code review) — not chat replies.
 
 - Open with a TL;DR block: ≤3 lines, plain language.
 - Include a "Decisions / actions needed" section near the top when relevant.
 - Max 4 top-level sections. Overflow goes in an Appendix.
 - No section longer than 10 lines without a subheading or list break.
-- One idea per bullet — no bullets that run to 3+ lines.
+- One bullet = one short phrase. Lead with the verb, no lead-in clauses.
+- Multi-statement content must be bulleted, not run into one long sentence.
+- Never say the same thing twice in different words — merge duplicate points into one.
 
 ## Evidence and reasoning rules
 

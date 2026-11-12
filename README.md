@@ -7,9 +7,9 @@
 | File | Purpose |
 |---|---|
 | `CLAUDE.md` | Root import file — pulls in the rules below |
-| `brevity.md` | Chat response formatting (lead with answer, bullets, no preamble) |
+| `brevity-chat.md` | Chat response formatting (lead with answer, bullets, no preamble) |
 | `plain-english.md` | Plain, simple English for non-native speakers — short sentences, no idioms, spell out acronyms |
-| `docs.md` | Markdown doc structure (TL;DR, decisions section, section limits) |
+| `brevity-docs.md` | Doc and artefact structure (TL;DR, decisions section, section limits, one phrase per bullet) |
 | `evidence.md` | Requires inline evidence for confident claims; no-evidence protocol |
 | `auto-mode-writes.md` | Confirm before every write/mutate action in auto mode |
 | `clarify-first.md` | Surface ambiguities and confirm before executing; state assumptions explicitly |
@@ -26,7 +26,7 @@ Note: `CLAUDE.md` imports eight rule files. `CLAUDE.inline.md` mirrors seven of 
 ```bash
 mkdir -p ~/.claude/rules
 ln -sf ~/Development/agent-rules/CLAUDE.md ~/.claude/CLAUDE.md
-for f in brevity plain-english docs evidence auto-mode-writes clarify-first self-review-before-commit dev-standard; do
+for f in brevity-chat plain-english brevity-docs evidence auto-mode-writes clarify-first self-review-before-commit dev-standard; do
   ln -sf ~/Development/agent-rules/$f.md ~/.claude/rules/$f.md
 done
 ```
