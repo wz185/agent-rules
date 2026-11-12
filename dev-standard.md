@@ -30,4 +30,4 @@ Applies to any software dev task (feature, bug fix, refactor) in any repo.
 ## Finish
 - Check each acceptance criterion with evidence (test name, output, file:line).
 - Report: changes, test results, coverage, risks, how to verify in production, next step that needs approval.
-- At any point, stop and ask if the requirement is unclear, tests cannot run, the task grows beyond one slice, or the change touches DB migrations, infra, auth or billing.
+- At any point, stop and ask if the requirement is unclear, tests cannot run, the task grows beyond one slice, or the change touches DB migrations, infra or auth.
