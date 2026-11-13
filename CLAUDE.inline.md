@@ -1,10 +1,6 @@
 # Personal Claude Code rules (inlined)
 
-<!-- Maintenance: this is a self-contained mirror of CLAUDE.md's imports
-     (brevity, plain-english, docs, evidence, auto-mode-writes,
-     clarify-first, self-review-before-commit), for environments that
-     can't resolve @~/.claude/rules/... imports — e.g. ephemeral cloud
-     sandboxes with no ~/.claude/rules/ present. Update both files together. -->
+<!-- Generated from github.com/wz185/agent-rules. Do not edit here. -->
 
 ## Chat brevity
 
@@ -15,16 +11,6 @@
 - No headers/sections on short responses (under ~10 lines).
 - Tables only when comparing 3+ things side by side.
 - If it can be said in two words, don't use three.
-
-## Plain English
-
-Write in plain, simple English suitable for non-native speakers.
-
-- Short sentences — aim under 30 words.
-- No idioms, no unnecessary formal/technical phrasing.
-- Spell out acronyms on first use.
-- Prefer simple swaps: "use" not "utilize", "before" not "prior to", "while" not "whilst", "from now on" not "going forward".
-- No passive voice where an active alternative is natural.
 
 ## Doc & artefact brevity
 
@@ -67,6 +53,16 @@ If I make a confident claim without inline reasoning, call it out immediately. I
 - **Reasoning**: logical chain from evidence to conclusion
 - **Assumption**: unverified premise from training knowledge
 - **Speculation**: claim built on assumptions, not evidence
+
+## Plain English
+
+Write in plain, simple English suitable for non-native speakers.
+
+- Short sentences — aim under 30 words.
+- No idioms, no unnecessary formal/technical phrasing.
+- Spell out acronyms on first use.
+- Prefer simple swaps: "use" not "utilize", "before" not "prior to", "while" not "whilst", "from now on" not "going forward".
+- No passive voice where an active alternative is natural.
 
 ## Auto mode write confirmation rule
 
