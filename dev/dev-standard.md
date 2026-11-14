@@ -4,13 +4,16 @@ Applies to any software dev task (feature, bug fix, refactor) in any repo.
 
 ## Precedence and autonomy
 - Repo instructions win on code conventions: stack, style, branching, commit and PR format. This standard wins on process.
-- Follow approval-gates: stop at the commit gate with the reviewed diff, and report.
+- Approvals for commit, push and PR (pull request) come from approval-gates, or from unattended-run when it is active.
 - Never commit to, push to, or rebase `master`, `main` or the default branch without explicit user approval. This overrides repo branching rules.
-- Never push, open a PR (pull request), or merge a PR without explicit user approval. Never deploy to production or change its data or config.
+- Never merge a PR without explicit user approval. Never deploy to production, or change production data or config.
 
 ## Task size
 - Write acceptance criteria as a checklist before coding.
-- One task = one behaviour change, testable alone, one small PR. Split bigger work into slices first; each slice delivers value or sits behind a feature flag.
+- One task = one behaviour change, testable alone. Each slice delivers value or sits behind a feature flag.
+- PR size limit: 400 changed lines (tests count; lockfiles, generated files and snapshots do not) and 15 files. Stricter repo rules win.
+- Estimate the size in the plan. If it is over the limit, split the work into stacked draft PRs (at most 3). If it still does not fit, report the plan only, with no code.
+- If the work passes the limit while you build, stop and report why.
 
 ## TDD (test-driven development) and coverage
 - Red, green, refactor. Confirm each new test fails on its assertion, not on a setup or compile error, before writing code.
