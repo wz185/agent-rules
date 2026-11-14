@@ -4,14 +4,14 @@
 
 ## Decisions / actions needed
 
-- None currently. Update this section if a rule change needs re-pasting into Claude Desktop.
+- Re-paste `CLAUDE.inline.md` into Claude Desktop custom instructions: approval gates replaced auto-mode write confirmation and self-review before commit. Cloud sessions pick this up after merge to `main`.
 
 ## Layout
 
 | Path | Purpose |
 |---|---|
 | `core/` | Rules for every environment: chat brevity, plain English, doc brevity, evidence |
-| `interactive/` | Rules for sessions with a human present: clarify-first, auto-mode write confirmation, self-review before commit |
+| `interactive/` | Rules for sessions with a human present: approval gates (ask at plan, commit, push/PR, and risky or external writes; review loop between), clarify-first |
 | `autonomous/` | Rules for unattended dev work: dev standard |
 | `build.sh` | Generates `CLAUDE.md` and `CLAUDE.inline.md`. `./build.sh --check` fails if they are out of date. CI runs it on every push and pull request |
 | `CLAUDE.md` | **Generated.** Local profile: imports all three folders |

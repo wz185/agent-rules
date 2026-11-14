@@ -4,9 +4,8 @@
 @~/Development/agent-rules/core/brevity-docs.md
 @~/Development/agent-rules/core/evidence.md
 @~/Development/agent-rules/core/plain-english.md
-@~/Development/agent-rules/interactive/auto-mode-writes.md
+@~/Development/agent-rules/interactive/approval-gates.md
 @~/Development/agent-rules/interactive/clarify-first.md
-@~/Development/agent-rules/interactive/self-review-before-commit.md
 @~/Development/agent-rules/autonomous/dev-standard.md
 
 ---

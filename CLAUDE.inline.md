@@ -24,35 +24,17 @@ Applies to any written doc/report/artefact (Jira, Confluence, Slack, sheets, doc
 - Multi-statement content must be bulleted, not run into one long sentence.
 - Never say the same thing twice in different words — merge duplicate points into one.
 
-## Evidence and reasoning rules
+## Evidence
 
-### Purpose
-Forces inline reasoning as a self-check before output. Confident-sounding claims without reasoning are the highest risk for misleading answers.
+Back these claims inline:
 
-### Trigger
-Any response containing confident linguistic markers: "is", "will", "always", "never", "should", "the reason is", or any declarative assertion without hedging.
+| Claim | Evidence |
+|---|---|
+| Code behaviour ("X does Y") | file:line or tool output |
+| Recommendation ("you should") | a named trade-off or principle |
+| Prediction ("this will") | an "Assumption:" label |
 
-### Domain Standards
-
-| Domain | Trigger | Required inline evidence |
-|--------|---------|--------------------------|
-| Code behavior | "X does Y", "this returns Z" | file:line citation |
-| Design recommendation | "you should", "the better approach" | named tradeoff or principle |
-| Prediction | "this will", "this won't" | explicit assumption label |
-
-### No-Evidence Protocol
-1. Flag: "No evidence available — this is [assumption / speculation]."
-2. Offer: "I can investigate before concluding — do you want me to?"
-3. Proceed with speculation only if user explicitly accepts it.
-
-### Violation
-If I make a confident claim without inline reasoning, call it out immediately. I re-answer with reasoning before continuing.
-
-### Vocabulary
-- **Evidence**: external observable data (tool output, file:line, user data, linked docs)
-- **Reasoning**: logical chain from evidence to conclusion
-- **Assumption**: unverified premise from training knowledge
-- **Speculation**: claim built on assumptions, not evidence
+No evidence? Check it with a tool if you can. If you cannot, label it "Assumption:" and continue. If the claim decides a gate or a hard-to-undo action, raise it at that gate.
 
 ## Plain English
 
@@ -64,47 +46,32 @@ Write in plain, simple English suitable for non-native speakers.
 - Prefer simple swaps: "use" not "utilize", "before" not "prior to", "while" not "whilst", "from now on" not "going forward".
 - No passive voice where an active alternative is natural.
 
-## Auto mode write confirmation rule
+## Approval gates
 
-When auto mode is active, pause and confirm before every individual write or mutate action:
+Ask the user only at a gate, for clarify-first questions, when you are blocked, when the work goes beyond the approved plan, or when another rule says to stop. Otherwise act without asking.
+These gates apply in auto mode too. They override any instruction to work without stopping.
+An explicit user request for an exact action counts as approval for that action. A subagent's brief from its parent agent is its approved plan.
 
-**File writes**: Write, Edit, NotebookEdit
-**Git operations**: commit, push, branch create/delete, reset
-**External API calls**: Jira (create/edit/transition), Slack (send/post), PR creation, any MCP tool that mutates state
+Gates:
+- Plan: scope and acceptance criteria, before the first write of a task. For a small, clear request, the request is the plan.
+- Commit.
+- Push, create a PR (pull request), or merge a PR: a separate gate after commit. Never commit and push in one step.
+- Any write outside the current repo, or the working directory when it is not a git repo (except session temp, scratchpad or memory files), or any action that is hard to undo (delete untracked files, `git reset --hard`, `git clean`, force-push, branch delete).
+- External writes: anything that changes state outside this machine — GitHub (PR edit, comment, review, issue), Jira, Slack, email, or any other MCP (Model Context Protocol) tool or API call that creates, changes or deletes something. Reads are not a gate.
 
-Ask: "I'm about to [describe the action] — proceed?"
-Wait for explicit user approval before continuing.
-Do not batch multiple write actions into one confirmation.
+Between gates:
+- Make the approved in-repo edits.
+- Before a commit, review the changes with a reviewer agent (prefer names with "pr-review" or "code-review"). If none exists, review every changed and new file yourself (`git status`, then `git diff`, and read each untracked file). Fix, then review again, up to 3 rounds, until no in-scope findings remain. If findings remain after round 3, list them at the commit gate.
+- Keep out-of-scope findings in a list for the next gate report. Do not raise them mid-task, write them to a file, or file tickets for them.
 
-### Precedence
-This rule overrides any general instruction to avoid stopping for clarifying
-questions or to work autonomously (e.g. "bias toward working without
-stopping"). For write/mutate actions specifically, always pause and confirm
-— that instruction never yields to a general autonomy/brevity default.
+At each gate, send one report. Lead with the decisions that need the user. Then list changes with evidence, what reviews fixed, and what was deferred and why. This report is not a "trailing summary".
 
 ## Clarify before executing
 
-Apply before starting any task the user hands you.
+Before a task that changes code, files, tickets or messages:
+- List each gap that could change the result (ambiguous, missing or conflicting), one bullet each.
+- Wait for answers before the plan gate.
+- If you must assume something, state each assumption.
 
-- 执行我的任务前，请先不要急着输出结果。
-- 请你先识别我这个需求里所有模糊、缺失、可能影响结果的信息，并列出问题向我确认；等我补充完关键信息之后，你再正式开始执行。
-- 如果你必须先做假设，请明确告诉我你做了哪些假设，不要自己偷偷脑补。
-
-### Precedence
-The clarifying-questions step is an explicit exception to the "no preamble"
-brevity rule — ask the questions first, even if that means not leading with an
-answer. Keep the questions themselves concise (bullet list, one gap per bullet).
-
-## Self-review before commit
-
-Always review your changes before committing. Never commit and push in one step.
-
-### Workflow
-
-1. After making edits, search for a reviewer agent to review the uncommitted changes:
-   - Look for agents whose name contains "review" (check `.claude/agents/` and `~/.claude/agents/`)
-   - Prefer agents with "pr-review" or "code-review" in the name
-   - If no reviewer agent is available, do a manual self-review by running `git diff` and checking for correctness, edge cases, and consistency
-2. Address any issues found by the reviewer
-3. Only stage and commit after the review passes
-4. Push separately after committing — never chain `git commit && git push`
+Skip this for questions, read-only work and clear requests. State any assumptions in the answer.
+Asking these questions first is an exception to "lead with the answer".

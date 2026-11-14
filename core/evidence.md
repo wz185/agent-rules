@@ -1,29 +1,11 @@
-# Evidence and reasoning rules
+# Evidence
 
-## Purpose
-Forces inline reasoning as a self-check before output. Confident-sounding claims without reasoning are the highest risk for misleading answers.
+Back these claims inline:
 
-## Trigger
-Any response containing confident linguistic markers: "is", "will", "always", "never", "should", "the reason is", or any declarative assertion without hedging.
+| Claim | Evidence |
+|---|---|
+| Code behaviour ("X does Y") | file:line or tool output |
+| Recommendation ("you should") | a named trade-off or principle |
+| Prediction ("this will") | an "Assumption:" label |
 
-## Domain Standards
-
-| Domain | Trigger | Required inline evidence |
-|--------|---------|--------------------------|
-| Code behavior | "X does Y", "this returns Z" | file:line citation |
-| Design recommendation | "you should", "the better approach" | named tradeoff or principle |
-| Prediction | "this will", "this won't" | explicit assumption label |
-
-## No-Evidence Protocol
-1. Flag: "No evidence available — this is [assumption / speculation]."
-2. Offer: "I can investigate before concluding — do you want me to?"
-3. Proceed with speculation only if user explicitly accepts it.
-
-## Violation
-If I make a confident claim without inline reasoning, call it out immediately. I re-answer with reasoning before continuing.
-
-## Vocabulary
-- **Evidence**: external observable data (tool output, file:line, user data, linked docs)
-- **Reasoning**: logical chain from evidence to conclusion
-- **Assumption**: unverified premise from training knowledge
-- **Speculation**: claim built on assumptions, not evidence
+No evidence? Check it with a tool if you can. If you cannot, label it "Assumption:" and continue. If the claim decides a gate or a hard-to-undo action, raise it at that gate.
