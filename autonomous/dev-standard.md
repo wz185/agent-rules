@@ -4,7 +4,7 @@ Applies to any software dev task (feature, bug fix, refactor) in any repo.
 
 ## Precedence and autonomy
 - Repo instructions win on code conventions: stack, style, branching, commit and PR format. This standard wins on process.
-- Work up to a local commit, reviewed as in self-review-before-commit. Then stop and report. In auto mode, auto-mode-writes still applies.
+- Follow approval-gates: stop at the commit gate with the reviewed diff, and report.
 - Never commit to, push to, or rebase `master`, `main` or the default branch without explicit user approval. This overrides repo branching rules.
 - Never push, open a PR (pull request), or merge a PR without explicit user approval. Never deploy to production or change its data or config.
 
