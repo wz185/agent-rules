@@ -26,6 +26,7 @@ To add or change a rule:
 - Run `./build.sh`.
 - Commit the rule file together with the regenerated `CLAUDE.md`, `CLAUDE.inline.md` and `CLAUDE.dev.md`.
 - Keep `CLAUDE.md` plus all its imports under 150 lines in total.
+- Keep each cloud profile (`CLAUDE.inline.md` and `CLAUDE.dev.md`) under 200 lines. Claude Code docs: files over 200 lines use more context and may reduce adherence.
 
 ## Usage
 
