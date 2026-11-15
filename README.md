@@ -4,7 +4,8 @@
 
 ## Decisions / actions needed
 
-- Re-paste `CLAUDE.inline.md` into Claude Desktop custom instructions: approval gates replaced auto-mode write confirmation and self-review before commit. Cloud sessions pick this up after merge to `main`.
+- Re-paste `CLAUDE.inline.md` into Claude Desktop custom instructions: approval gates replaced auto-mode write confirmation and self-review before commit.
+- Edit and save the setup script in each cloud environment after a merge to `main` (any change, such as a dated comment). Cloud sessions keep the old rules until then.
 
 ## Layout
 
@@ -25,6 +26,7 @@ To add or change a rule:
 - Run `./build.sh`.
 - Commit the rule file together with the regenerated `CLAUDE.md`, `CLAUDE.inline.md` and `CLAUDE.dev.md`.
 - Keep `CLAUDE.md` plus all its imports under 150 lines in total.
+- Keep each cloud profile (`CLAUDE.inline.md` and `CLAUDE.dev.md`) under 200 lines. Claude Code docs: files over 200 lines use more context and may reduce adherence.
 
 ## Usage
 
@@ -44,13 +46,19 @@ This writes your user-level rules file outside the repo, so nothing gets committ
 
 The setup script result is cached as a snapshot for about 7 days. After a rule change is merged, edit and save the setup script (any change, such as a comment with the date) so new sessions get the new rules.
 
-**Cloud dev environment (unattended runs)** — a separate cloud environment for dev tasks. It needs a Jira connector that works without a login prompt, and push access to the GitHub repo. Use this setup script instead of the one above:
+This profile has no dev standard. Start dev tasks in the cloud dev environment below, which also works for sessions you run yourself.
+
+**Cloud dev environment (unattended runs)** — a separate cloud environment for dev tasks. It needs a Jira connector that works without a login prompt, and push and Actions access to each GitHub repo you name in the prompt. Use this setup script instead of the one above:
 
     mkdir -p ~/.claude && curl -fsSL https://raw.githubusercontent.com/wz185/agent-rules/main/CLAUDE.dev.md -o ~/.claude/CLAUDE.md
 
 Schedule a session in that environment with a prompt that starts with `UNATTENDED RUN`, for example:
 
-    UNATTENDED RUN. Pick one ready Jira ticket labelled claude-ready-wei, build it, open a draft PR, and end with the report.
+    UNATTENDED RUN. Repo: <owner>/<repo>. Pick one ready Jira ticket labelled claude-ready-wei, build it, open a draft PR, and end with the report.
+
+For a follow-up run on an open PR, give the PR link:
+
+    UNATTENDED RUN. Follow up <PR link>: fix CI failures and valid review findings, push, and end with the report.
 
 Only a first message that starts with `UNATTENDED RUN` turns on unattended mode. Sessions you start yourself in the same environment use the normal approval gates.
 

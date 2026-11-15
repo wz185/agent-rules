@@ -2,6 +2,7 @@
 
 Before a task that changes code, files, tickets or messages:
 - List each gap that could change the result (ambiguous, missing or conflicting), one bullet each.
+- Answer each gap that a read-only tool can answer (code, logs, tickets, production data). Ask only the gaps that remain.
 - Wait for answers before the plan gate.
 - If you must assume something, state each assumption.
 
