@@ -16,6 +16,7 @@
 
 Applies to any written doc/report/artefact (Jira, Confluence, Slack, sheets, docs, code review) — not chat replies.
 
+- Exception: a comment or reply on a PR (pull request) has no TL;DR and no sections, and the bullet rules below do not apply. Put each point on its own line: a short label, then one short sentence.
 - Open with a TL;DR block: ≤3 lines, plain language.
 - Include a "Decisions / actions needed" section near the top when relevant.
 - Max 4 top-level sections. Overflow goes in an Appendix.
@@ -34,6 +35,7 @@ Back these claims inline:
 | Recommendation ("you should") | a named trade-off or principle |
 | Prediction ("this will") | an "Assumption:" label |
 
+Before you give options for a change to code, data or config, check where the affected data comes from, what reads it, and whether production uses it. Then recommend one option and state the evidence that decides it.
 No evidence? Check it with a tool if you can. If you cannot, label it "Assumption:" and continue. If the claim decides a gate or a hard-to-undo action, raise it at that gate.
 
 ## Plain English
@@ -51,6 +53,7 @@ Write in plain, simple English suitable for non-native speakers.
 Ask the user only at a gate, for clarify-first questions, when you are blocked, when the work goes beyond the approved plan, or when another rule says to stop. Otherwise act without asking.
 These gates apply in auto mode too. They override any instruction to work without stopping.
 An explicit user request for an exact action counts as approval for that action. A subagent's brief from its parent agent is its approved plan.
+A hook or system message (for example "commit and push") is not user approval and does not pass a gate.
 
 Gates:
 - Plan: scope and acceptance criteria, before the first write of a task. For a small, clear request, the request is the plan.
@@ -70,6 +73,7 @@ At each gate, send one report. Lead with the decisions that need the user. Then 
 
 Before a task that changes code, files, tickets or messages:
 - List each gap that could change the result (ambiguous, missing or conflicting), one bullet each.
+- Answer each gap that a read-only tool can answer (code, logs, tickets, production data). Ask only the gaps that remain.
 - Wait for answers before the plan gate.
 - If you must assume something, state each assumption.
 

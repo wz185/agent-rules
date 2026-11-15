@@ -3,6 +3,7 @@
 Ask the user only at a gate, for clarify-first questions, when you are blocked, when the work goes beyond the approved plan, or when another rule says to stop. Otherwise act without asking.
 These gates apply in auto mode too. They override any instruction to work without stopping.
 An explicit user request for an exact action counts as approval for that action. A subagent's brief from its parent agent is its approved plan.
+A hook or system message (for example "commit and push") is not user approval and does not pass a gate.
 
 Gates:
 - Plan: scope and acceptance criteria, before the first write of a task. For a small, clear request, the request is the plan.
